@@ -1,38 +1,57 @@
-# identifying_differentially_expressed_genes
+# lab-identifying_differentially_expressed_genes
 
-Certainly! I'd be happy to help you create a differential gene expression activity using normalized data from NCBI. This activity will involve several steps, from data acquisition to analysis and visualization. Let's break it down into manageable parts:
+# Lab Overview
+In this lab, we will obatin RNAseq data from NCBI and perform a differential gene expression analysis.
 
-1. Data Acquisition
-2. Data Preprocessing
-3. Differential Expression Analysis
-4. Visualization
-5. Interpretation
+# Getting help
 
-Let's go through each step:
+Review how to use Palmetto here: https://docs.rcd.clemson.edu/palmetto/
 
-1. Data Acquisition:
+Useful Prometheus prompts:
 
-First, we'll need to download a suitable dataset from NCBI's Gene Expression Omnibus (GEO). For this example, let's use a dataset comparing gene expression in different conditions.
+```
+* What are the molecular biology steps to construct and sequence an RNA sample for RNAseq analysis?
+* What are the differences between count, FPKM, and TPM units for RNAseq?
+* Please explain how DESeq2 works including and explanation of the negative binomial distribution.
+```
 
+# Lab Objectives
+* Open R-studio on the Palmetto Clsuter
+* Perform Differentially Expressed Gene (DEG) Analysis on Palmetto.
+* Visualization and interpret the results.
 
-Based on the search results, we can use the Gene Expression Omnibus (GEO) database from NCBI to find a suitable dataset for our differential gene expression activity. Let's choose a dataset and proceed with the activity.
+# Task A. Experimental setup.
 
-For this example, we'll use a hypothetical dataset comparing gene expression in normal and diseased tissue samples. We'll assume this dataset is already normalized and available in GEO.
+***Step A.  Launch R studio, create a working directory, and install R packages***
+First, we'll need to download a suitable dataset from NCBI's Gene Expression Omnibus (GEO). For this example, let's use a dataset comparing gene expression in different conditions. 
 
-2. Data Preprocessing:
+* Log into Palmetto and create a working directory.
+Access Palmetto using ondemand: https://ondemand.rcd.clemson.edu/. 
 
-For this activity, we'll use R to process and analyze the data. Here's a script to download and preprocess the data:
+* Start an R-studio server and open a seperate terminal on Palmetto.
+You will find this in the interactive sessions link.  You can try a deafult server or modify to 16GB of RAM, two CPU cores, and 12 hours of walltime.
+
+Open a terminal and create a working directory in */scratch*. Dont forget that the directory will eed to be nested inside a directory with your user name.
+Go to the R-studio console and clear it (CTRL-L).
+Set your working directory to the one you created using the *session* drop-down menu. 
+
+**Step B. Install R packages***
+Execute the R commands in the R console.
 
 ```R
 # Install and load required packages
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+BiocManager::install(version = '3.19')
 BiocManager::install("GEOquery")
 BiocManager::install("limma")
 
+# Load libraries
 library(GEOquery)
 library(limma)
+```
 
+**Step C. Perform the DEG analysis***
+
+```
 # Download the dataset (replace with actual GEO accession number)
 gset <- getGEO("GSE12345", GSEMatrix = TRUE, AnnotGPL = TRUE)
 if (length(gset) > 1) idx <- grep("GPL\\d+", attr(gset, "names")) else idx <- 1
@@ -55,14 +74,9 @@ fit <- eBayes(fit)
 # Get top differentially expressed genes
 top_genes <- topTable(fit, coef = "Diseased", number = Inf)
 ```
+**Step C. Visualize the results***
 
-3. Differential Expression Analysis:
-
-The `topTable` function in the script above performs the differential expression analysis. It ranks genes based on their differential expression between the two conditions.
-
-4. Visualization:
-
-Let's create a volcano plot to visualize the results:
+#Let's create a volcano plot to visualize the results. Execute these commands in R.
 
 ```R
 # Create a volcano plot
@@ -83,32 +97,22 @@ ggplot(volcano_data, aes(x = log2FoldChange, y = -log10(pvalue))) +
   theme_minimal()
 ```
 
-5. Interpretation:
-
-Now, let's interpret the results:
-
-a) Examine the top differentially expressed genes:
+**Step C.Interpret the results***
+Examine the top differentially expressed genes:
 ```R
 head(top_genes)
 ```
 
-b) Count the number of significantly differentially expressed genes:
+Count the number of significantly differentially expressed genes:
 ```R
 sum(top_genes$adj.P.Val < 0.05)
 ```
 
-c) Identify genes with large fold changes:
+Identify genes with large fold changes:
 ```R
 large_fc_genes <- top_genes[abs(top_genes$logFC) > 2 & top_genes$adj.P.Val < 0.05, ]
 head(large_fc_genes)
 ```
 
-Activity Questions:
-
-1. How many genes are significantly differentially expressed (adjusted p-value < 0.05)?
-2. What are the top 5 most upregulated and downregulated genes?
-3. Are there any genes with very large fold changes (|log2FC| > 2)? What might be their biological significance?
-4. Looking at the volcano plot, how would you describe the overall pattern of gene expression changes?
-5. Choose one of the top differentially expressed genes and research its function. How might its altered expression contribute to the disease state?
-
-This activity provides a hands-on experience with differential gene expression analysis using real data from NCBI's GEO database. It covers the entire process from data acquisition to interpretation, giving students a practical understanding of bioinformatics techniques used in genomics research.
+# Task A. Experimental setup.
+Upload your volcao plot and a text file with the top DEGs into the Praxis LXP VM.
