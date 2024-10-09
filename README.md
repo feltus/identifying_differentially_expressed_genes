@@ -38,7 +38,8 @@ You will find this in the interactive sessions link.  You can try a default serv
 * Set your working directory to the one you created using the *session* drop-down menu. 
 
 **Step B. Install R packages***
-Execute the R commands in the R console.
+
+* Execute these R commands in the R console.
 
 ```R
 # Install and load required packages
