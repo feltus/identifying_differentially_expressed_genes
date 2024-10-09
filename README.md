@@ -29,11 +29,13 @@ First, we'll need to download a suitable dataset from NCBI's Gene Expression Omn
 Access Palmetto using ondemand: https://ondemand.rcd.clemson.edu/. 
 
 * Start an R-studio server and open a seperate terminal on Palmetto.
-You will find this in the interactive sessions link.  You can try a deafult server or modify to 16GB of RAM, two CPU cores, and 12 hours of walltime.
+You will find this in the interactive sessions link.  You can try a default server or modify to 16GB of RAM, two CPU cores, and 12 hours of walltime.
 
-Open a terminal and create a working directory in */scratch*. Dont forget that the directory will eed to be nested inside a directory with your user name.
-Go to the R-studio console and clear it (CTRL-L).
-Set your working directory to the one you created using the *session* drop-down menu. 
+* Open a terminal and create a working directory in */scratch*. Dont forget that the directory will eed to be nested inside a directory with your user name.
+
+*Go to the R-studio console and clear it (CTRL-L).
+
+* Set your working directory to the one you created using the *session* drop-down menu. 
 
 **Step B. Install R packages***
 Execute the R commands in the R console.
