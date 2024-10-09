@@ -33,7 +33,7 @@ You will find this in the interactive sessions link.  You can try a default serv
 
 * Open a terminal and create a working directory in */scratch*. Dont forget that the directory will eed to be nested inside a directory with your user name.
 
-*Go to the R-studio console and clear it (CTRL-L).
+* Go to the R-studio console and clear it (CTRL-L).
 
 * Set your working directory to the one you created using the *session* drop-down menu. 
 
