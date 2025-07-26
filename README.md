@@ -116,6 +116,3 @@ Identify genes with large fold changes:
 large_fc_genes <- top_genes[abs(top_genes$logFC) > 2 & top_genes$adj.P.Val < 0.05, ]
 head(large_fc_genes)
 ```
-
-# Task A. Experimental setup.
-Upload your volcao plot and a text file with the top DEGs into the Praxis LXP VM.
