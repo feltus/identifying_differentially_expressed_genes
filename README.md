@@ -1,4 +1,4 @@
-# lab-identifying_differentially_expressed_genes
+# Computational Practice: Indentifying Differentially Expressed Genes (DEGs)
 
 # Lab Overview
 In this lab, we will obatin RNAseq data from NCBI and perform a differential gene expression analysis.
