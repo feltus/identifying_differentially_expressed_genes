@@ -46,6 +46,8 @@ You will find this in the interactive sessions link.  You can try a default serv
 BiocManager::install(version = '3.19')
 BiocManager::install("GEOquery")
 BiocManager::install("limma")
+install.packages("BiocManager")
+install.packages("ggplot2")
 
 # Load libraries
 library(GEOquery)
@@ -55,8 +57,11 @@ library(limma)
 **Step C. Perform the DEG analysis***
 
 ```
+#Load libraries
+library(GEOquery)
+library(limma)
 # Download the dataset (You can replace with another GEO accession number)
-gset <- getGEO("GSE12345", GSEMatrix = TRUE, AnnotGPL = TRUE)
+gset <- getGEO("GSE45827", GSEMatrix = TRUE, AnnotGPL = TRUE)
 if (length(gset) > 1) idx <- grep("GPL\\d+", attr(gset, "names")) else idx <- 1
 gset <- gset[[idx]]
 
@@ -66,16 +71,27 @@ ex <- exprs(gset)
 # Extract phenotype data
 pd <- pData(gset)
 
-# Create a design matrix (assuming two groups: normal and diseased)
-design <- model.matrix(~ factor(pd$group))
-colnames(design) <- c("Intercept", "Diseased")
+# Extract groups based on diagnosis from characteristics_ch1
+pd$group <- ifelse(pd$characteristics_ch1 == "diagnosis: None (normal)", 
+                   "Normal", "Cancer")
+
+# Convert to factor and check
+pd$group <- factor(pd$group)
+print("Group distribution (Cancer vs Normal):")
+table(pd$group, useNA = "always")
+
+# Create design matrix
+design <- model.matrix(~ 0 + group, data = pd)
+colnames(design) <- levels(pd$group)
+print("? Design matrix created!")
+print(head(design))
 
 # Fit the model
 fit <- lmFit(ex, design)
 fit <- eBayes(fit)
 
 # Get top differentially expressed genes
-top_genes <- topTable(fit, coef = "Diseased", number = Inf)
+top_genes <- topTable(fit, coef = "Cancer", number = Inf)
 ```
 **Step C. Visualize the results***
 
