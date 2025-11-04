@@ -42,12 +42,12 @@ You will find this in the interactive sessions link.  You can try a default serv
 * Execute these R commands in the R console.
 
 ```R
-# Install and load required packages
+# Install and load required R packages
+install.packages("BiocManager")
+install.packages("ggplot2")
 BiocManager::install(version = '3.19')
 BiocManager::install("GEOquery")
 BiocManager::install("limma")
-install.packages("BiocManager")
-install.packages("ggplot2")
 ```
 
 **Step C. Perform the DEG analysis***
