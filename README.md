@@ -48,18 +48,15 @@ BiocManager::install("GEOquery")
 BiocManager::install("limma")
 install.packages("BiocManager")
 install.packages("ggplot2")
-
-# Load libraries
-library(GEOquery)
-library(limma)
 ```
 
 **Step C. Perform the DEG analysis***
 
 ```
-#Load libraries
+# Load libraries
 library(GEOquery)
 library(limma)
+
 # Download the dataset (You can replace with another GEO accession number)
 gset <- getGEO("GSE45827", GSEMatrix = TRUE, AnnotGPL = TRUE)
 if (length(gset) > 1) idx <- grep("GPL\\d+", attr(gset, "names")) else idx <- 1
