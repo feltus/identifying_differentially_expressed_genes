@@ -114,7 +114,7 @@ ggplot(volcano_data, aes(x = log2FoldChange, y = -log10(pvalue))) +
   theme_minimal()
 ```
 
-**Step C.Interpret the results***
+**Step D. Interpret the results***
 Examine the top differentially expressed genes:
 ```R
 head(top_genes)
