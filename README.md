@@ -55,7 +55,7 @@ library(limma)
 **Step C. Perform the DEG analysis***
 
 ```
-# Download the dataset (replace with actual GEO accession number)
+# Download the dataset (You can replace with another GEO accession number)
 gset <- getGEO("GSE12345", GSEMatrix = TRUE, AnnotGPL = TRUE)
 if (length(gset) > 1) idx <- grep("GPL\\d+", attr(gset, "names")) else idx <- 1
 gset <- gset[[idx]]
