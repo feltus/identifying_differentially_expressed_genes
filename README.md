@@ -89,6 +89,7 @@ fit <- eBayes(fit)
 
 # Get top differentially expressed genes
 top_genes <- topTable(fit, coef = "Cancer", number = Inf)
+print(top_genes)
 ```
 **Step C. Visualize the results***
 
