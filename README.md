@@ -16,7 +16,7 @@ Useful Prometheus prompts:
 ```
 
 # Lab Objectives
-* Open R-studio on the Palmetto Clsuter
+* Open R-studio on the Palmetto Cluster
 * Perform Differentially Expressed Gene (DEG) Analysis on Palmetto.
 * Visualization and interpret the results.
 
